@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for subordinate in app.user.subordinates %}
+                <tr>
+                    <td>{{ subordinate.username }}</td>
+                    <td><a href="/?_switch_user={{ subordinate.username }}">Impersonate</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('IS_IMPERSONATOR') %}
+        <a href="/?_switch_user=_exit">Unimpersonate</a>
+    {% endif %}
+{% endblock body %}
